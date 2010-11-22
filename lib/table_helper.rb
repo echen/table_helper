@@ -202,7 +202,8 @@ module TableHelper
   #   </tfoot>
   #   <table>
   def collection_table(collection, klass = nil, html_options = {}, &block)
-    CollectionTable.new(collection, klass, html_options, &block).html.html_safe
+    result = CollectionTable.new(collection, klass, html_options, &block).html
+    result.respond_to?(:html_safe) ? result.html_safe : result
   end
 end
 

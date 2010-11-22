@@ -45,7 +45,8 @@ module TableHelper
       self[:class] = "#{self[:class]} #{alternate_class}".strip if alternate
       html = super
       @html_options = original_options
-      html.html_safe
+      result = html
+      result.respond_to?(:html_safe) ? result.html_safe : result
     end
     
     private
@@ -64,11 +65,12 @@ module TableHelper
           else
             cell = Cell.new(column, nil)
           end
-          
-          html << cell.html.html_safe
+          result = cell.html
+          html << (result.respond_to?(:html_safe) ? result.html_safe : result)
         end
         
-        html.html_safe
+        result = html
+        result.respond_to?(:html_safe) ? result.html_safe : result
       end
   end
 end

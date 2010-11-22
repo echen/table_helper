@@ -132,7 +132,8 @@ module TableHelper
         content << @header.html unless @header.empty?
         content << @rows.html
         content << @footer.html unless @footer.empty?
-        content.html_safe
+        result = content
+        result.respond_to?(:html_safe) ? result.html_safe : result
       end
   end
 end

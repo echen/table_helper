@@ -104,7 +104,8 @@ module TableHelper
       end
       
       def content
-        cells.values.map(&:html).join.html_safe
+        result = cells.values.map(&:html).join
+        result.respond_to?(:html_safe) ? result.html_safe : result
       end
   end
 end

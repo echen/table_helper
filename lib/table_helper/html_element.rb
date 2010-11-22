@@ -25,7 +25,8 @@ module TableHelper
     
     # Generates the html representing this element
     def html
-      content_tag(tag_name, content, @html_options).html_safe
+      result = content_tag(tag_name, content, @html_options)
+      result.respond_to?(:html_safe) ? result.html_safe : result
     end
     
     private
